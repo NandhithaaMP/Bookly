@@ -1,3 +1,4 @@
+import 'package:bookly/constants/textWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/booklyModel.dart';
@@ -17,7 +18,7 @@ class BookDetailScreen extends StatelessWidget {
             Navigator.pop(context);
           },
             child: Icon(Icons.arrow_back_ios)),
-        title: Text('Book Details'),
+        title: Text_Widget(text: 'Book Details',fontSize: 18,),
         backgroundColor: Colors.yellow,
       ),
       body: SingleChildScrollView(
@@ -56,24 +57,23 @@ class BookDetailScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        Text_Widget(text:
                           book.title,
-                          style: TextStyle(
                             fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
+                            fontweight: FontWeight.bold,
+
                         ),
                         SizedBox(height: 8),
-                        Text(
+                        Text_Widget(text:
                           'Author(s): ${book.authors.isEmpty ? 'Unknown' : book.authors.join(", ")}',
-                          style: TextStyle(fontSize: 16, color: Colors.grey[800]),
-                        ),
+                          fontSize: 16, color: Colors.grey[800]),
+
                         SizedBox(height: 8),
                         if (book.firstPublishYear != null)
-                          Text(
+                          Text_Widget(text:
                             'First Published: ${book.firstPublishYear}',
-                            style: TextStyle(fontSize: 16, color: Colors.grey[800]),
-                          ),
+                            fontSize: 16, color: Colors.grey[800]),
+
                       ],
                     ),
                   ),
@@ -93,22 +93,21 @@ class BookDetailScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    Text_Widget(text:
                       'About this book',
-                      style: TextStyle(
                         fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                        fontweight: FontWeight.bold,
+
                     ),
                     SizedBox(height: 8),
 
-                    Text(
+                    Text_Widget(text:
                       'No description available for this book.',
-                      style: TextStyle(
+
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
                         color: Colors.grey[600],
-                      ),
+
                     ),
                   ],
                 ),

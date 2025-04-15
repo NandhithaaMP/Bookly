@@ -1,4 +1,5 @@
 import 'package:bookly/constants/navigations.dart';
+import 'package:bookly/constants/textWidget.dart';
 import 'package:bookly/controller/mainProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bookly'),
+        title: Text_Widget(text: 'Bookly',fontSize: 20,),
         backgroundColor: Colors.yellow,
+        centerTitle: true,
       ),
       body: Column(
         children: [
@@ -31,11 +33,11 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Error: ${provider.error}'),
+                        Text_Widget(text: 'Error: ${provider.error}', fontSize: 10,),
                         SizedBox(height: 16),
                         ElevatedButton(
                           onPressed: () => provider.fetchBooks(context),
-                          child: Text('Try Again'),
+                          child: Text_Widget(text: 'Try Again',fontSize: 12,),
                         ),
                       ],
                     ),
@@ -49,15 +51,13 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Icon(Icons.book_outlined, size: 64, color: Colors.grey),
                         SizedBox(height: 16),
-                        Text(
-                          'No books found',
-                          style: TextStyle(fontSize: 18, color: Colors.grey[600]),
-                        ),
+                        Text_Widget(text:
+                          'No books found',fontSize: 18, color: Colors.grey[600]),
+
                         SizedBox(height: 8),
-                        Text(
-                          'Try a different search term',
-                          style: TextStyle(fontSize: 14, color: Colors.grey),
-                        ),
+                        Text_Widget(text:
+                          'Try a different search term',fontSize: 14, color: Colors.grey),
+
                       ],
                     ),
                   );
@@ -65,9 +65,9 @@ class HomeScreen extends StatelessWidget {
 
                 return NotificationListener<ScrollNotification>(
                   onNotification: (ScrollNotification scrollInfo) {
-                    // Check if we're at the bottom of the list
+
                     if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
-                      // Load more books when we reach the bottom
+
                       if (provider.hasMoreData && !provider.isLoadingMore) {
                         provider.loadMoreBooks(context);
                       }
@@ -77,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: provider.books.length + (provider.hasMoreData ? 1 : 0),
                     itemBuilder: (context, index) {
-                      // Show loading indicator at the bottom while loading more books
+
                       if (index == provider.books.length) {
                         return Center(
                           child: Padding(
@@ -104,7 +104,7 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Refresh books using current search query
+
           Provider.of<MainProvider>(context, listen: false).fetchBooks(
               context,
               query: Provider.of<MainProvider>(context, listen: false).searchQuery.isNotEmpty
@@ -120,7 +120,6 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// BookSearchBar remains mostly the same
 class BookSearchBar extends StatelessWidget {
   final TextEditingController _searchController = TextEditingController();
 
@@ -223,23 +222,21 @@ class BookCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  Text_Widget(text:
                     book.title,
-                    style: TextStyle(
                       fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                      fontweight: FontWeight.bold,
+
                   ),
                   SizedBox(height: 8),
-                  Text(
+                  Text_Widget(text:
                     'Author(s): ${book.authors.isEmpty ? 'Unknown' : book.authors.join(", ")}',
-                    style: TextStyle(fontSize: 14),
+                   fontSize: 14
                   ),
                   SizedBox(height: 4),
                   if (book.firstPublishYear != null)
-                    Text(
-                      'Published: ${book.firstPublishYear}',
-                      style: TextStyle(fontSize: 14),
+                    Text_Widget(text:
+                      'Published: ${book.firstPublishYear}',fontSize: 14
                     ),
                 ],
               ),

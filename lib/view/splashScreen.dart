@@ -1,20 +1,18 @@
 
 import 'package:bookly/constants/navigations.dart';
+import 'package:bookly/constants/textWidget.dart';
 import 'package:bookly/view/homeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../controller/mainProvider.dart';
 import 'dart:async';
-import 'package:flutter/material.dart';
-
-
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   void navigateToHome(BuildContext context) async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 5));
     try {
       await Provider.of<MainProvider>(context, listen: false).fetchBooks(context);
       callNextPushReplacement(context, HomeScreen());
@@ -40,10 +38,9 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Bookly",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
+            Text_Widget(text:
+              "Bookly",fontSize: 30, fontweight: FontWeight.bold),
+
             SizedBox(height: 20),
             CircularProgressIndicator(),
           ],
